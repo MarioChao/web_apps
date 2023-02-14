@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="keywords" content="Weekly Reflection, Reflection, Performance">
+        <title>The Title</title>
+        <script src="graphCSV.js"></script>
+    </head>
+    <body>
+        <div style="background-color: antiquewhite; border: 3px solid black; text-align: center">
+            <h3>========= File Input ========</h1>
+            <hr color="black" size="1px" width="95%">
+            <br>
+            <!-- Student name field -->
+            <label for="studentName">Enter student name:</label>
+            <input type="text" name="studentName" id="studentName" autocomplete="name">
+            <br><br>
+            <!-- Files input -->
+            <label for="csvFile">Select a CSV File:</label>
+            <input type="file" name="csvFile" id="csvFile" accept=".csv" multiple="true">
+            <br><br>
+            <!-- Read files -->
+            <input type="button" value="Read Files" style="width: 100px; height: 30px; font-size: 15px; background-color: paleturquoise; border-radius: 5px" onclick="readCSVFile();">
+            <br>
+            <p>
+                Currently read <span id="filesRead"> 0 data</span>.
+            </p>
+        </div>
+        <br><br>
+        <div style="background-color: cornsilk; border: 3px solid black; text-align: center">
+            <h3>========= Output ========</h1>
+            <hr color="black" size="1px" width="95%">
+            <br>
+            <!-- Student & Subject dropdowns -->
+            <div style="display: flex; width: 50%; padding-left: 5%; align-items: left; text-align: left">
+                <div style="flex: 1">
+                    <label for="studentList">Student: </label>
+                    <select id="studentList" onchange="showSubjectList();">
+                        
+                    </select>
+                </div>
+                <div style="flex: 1">
+                    <label for="subjectList">Subject: </label>
+                    <select id="subjectList" onchange="graphCSVFile();">
+                        
+                    </select>
+                </div>
+            </div>
+            <br>
+            <!-- Graphing -->
+            <canvas id="chart" width="500px" height="300px"></canvas>
+        </div>
+    </body>
+</html>
