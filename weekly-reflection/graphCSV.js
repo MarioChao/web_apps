@@ -106,9 +106,9 @@ function graphCSVFile() {
         tmpX = originX;
         ctx.beginPath();
         ctx.moveTo(originX, originY);
-        for (let row = 0; row < dataArray.length; row++) {
+        for (let row = 0; row < dataArray.length - 1; row++) {
             let dataRowArr = dataArray[row].split(',');
-            tmpX += 1.0 * xRange / maxColSize;
+            tmpX += 1.0 * xRange / (dataArray.length - 1);
             if (col < dataRowArr.length) {
                 if (!isNaN(Number.parseInt(dataRowArr[col]))) {
                     ctx.lineTo(tmpX, originY - 2 - (1.0 * dataRowArr[col] / 10 * yRange));
