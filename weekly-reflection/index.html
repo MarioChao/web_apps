@@ -18,7 +18,7 @@
             <input type="text" name="studentName" id="studentName" autocomplete="name">
             <br><br>
             <!-- Files input -->
-            <label for="csvFile">Select a CSV File:</label>
+            <label for="csvFile">Select CSV File(s):</label>
             <input type="file" name="csvFile" id="csvFile" accept=".csv" multiple="true">
             <br><br>
             <!-- Read files -->
@@ -37,7 +37,7 @@
             <div style="display: flex; width: 50%; padding-left: 5%; align-items: left; text-align: left">
                 <div style="flex: 1">
                     <label for="studentList">Student: </label>
-                    <select id="studentList" onchange="showSubjectList();">
+                    <select id="studentList" onchange="showSubjectList(); graphCSVFile();">
                         
                     </select>
                 </div>
