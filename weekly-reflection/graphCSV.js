@@ -1,4 +1,3 @@
-
 var userData = new Map();
 var readCnt = 0;
 

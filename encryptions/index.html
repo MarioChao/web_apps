@@ -1,0 +1,62 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>Encryptions</title>
+        <script type="module" src="encryptionMain.js"></script>
+        <style>
+            .flex-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+            }
+            .flex-container > div {
+                margin: 10px;
+                padding: 10px;
+                border: 3px solid black;
+            }
+            textarea {
+                resize: none;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Interactive -->
+        <div class="flex-container">
+            <!-- Input -->
+            <div style="text-align: center;">
+                <div style="padding-bottom: 10px;">
+                    <!-- Text Input -->
+                    <label for="inputText">Enter text:</label>
+                    <textarea type="text" id="inputText" placeholder="It's a me, Mario!" rows="4" cols="25"></textarea>
+                    <br>
+                    <label for="inputKey">Enter key:</label>
+                    <textarea type="text" id="inputKey" placeholder="For sequences, separate each term by white space." rows="4" cols="25"></textarea>
+                    <br>
+                    <label for="inputRepeatedConut">Repeat count:</label>
+                    <input type="number" id="inputRepeatedCount" value="1">
+                    <br>
+                </div>
+                <div style="padding-bottom: 5px;">
+                    <!-- Encryption type -->
+                    <select id="encryptionType">
+                        <option>Hex ASCII to Text</option>
+                        <option>Text to Hex ASCII</option>
+                        <option>Yee Encrypt</option>
+                        <option>Yee Decrypt</option>
+                    </select>
+                    <br>
+                </div>
+                <div>
+                    <!-- Button -->
+                    <button id="encryptButton">Enter</button>
+                </div>
+            </div>
+            <!-- Output -->
+            <div style="width: 20%;">
+                <span>Result:</span>
+                <br>
+                <span id="encryptionResult"></span>
+            </div>
+        </div>
+    </body>
+</html>
