@@ -2,11 +2,12 @@
 <html>
     <head>
         <title>Encryptions</title>
-        <script type="module" src="encryptionMain.js"></script>
+        <script type="module" src="./encryptionMain.js"></script>
         <style>
             .flex-container {
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
                 justify-content: center;
             }
             .flex-container > div {
@@ -20,43 +21,81 @@
         </style>
     </head>
     <body>
-        <!-- Interactive -->
+        <!-- Input / Output -->
         <div class="flex-container">
             <!-- Input -->
-            <div style="text-align: center;">
-                <div style="padding-bottom: 10px;">
-                    <!-- Text Input -->
-                    <label for="inputText">Enter text:</label>
-                    <textarea type="text" id="inputText" placeholder="It's a me, Mario!" rows="4" cols="25"></textarea>
-                    <br>
-                    <label for="inputKey">Enter key:</label>
-                    <textarea type="text" id="inputKey" placeholder="For sequences, separate each term by white space." rows="4" cols="25"></textarea>
-                    <br>
-                    <label for="inputRepeatedConut">Repeat count:</label>
-                    <input type="number" id="inputRepeatedCount" value="1">
-                    <br>
-                </div>
-                <div style="padding-bottom: 5px;">
-                    <!-- Encryption type -->
-                    <select id="encryptionType">
-                        <option>Hex ASCII to Text</option>
-                        <option>Text to Hex ASCII</option>
-                        <option>Yee Encrypt</option>
-                        <option>Yee Decrypt</option>
-                    </select>
-                    <br>
-                </div>
-                <div>
-                    <!-- Button -->
-                    <button id="encryptButton">Enter</button>
-                </div>
+            <div style="padding-bottom: 5px;">
+                <!-- Text Input -->
+                <label for="start-input-text">Input text:</label>
+                <br>
+                <textarea type="text" id="start-input-text" placeholder="It's a me, Mario!" rows="10" cols="30" style="font-size: small;"></textarea>
+                <br>
             </div>
+            
             <!-- Output -->
-            <div style="width: 20%;">
+            <!--  overflow solution: stack-overflow 11599859 -->
+            <div style="width: 20%; overflow-wrap: break-word;">
                 <span>Result:</span>
                 <br>
-                <span id="encryptionResult"></span>
+                <span id="final-output-result"></span>
+            </div>
+        </div>
+
+        <!-- Node Modifiers -->
+        <div class="flex-container" id="node-modifiers">
+            <div style="border: 3px solid lightslategray; display: inline-flex;">
+                <button id="add-encryption-node" style="width: 100%; height: 60px;">
+                    <img src="../assets/images/plus.png" width="20px" height="20px">
+                    Add 1
+                </button>
+                <button id="remove-encryption-node" style="width: 100%; height: 60px;">
+                    <img src="../assets/images/minus.png" width="20px" height="20px">
+                    Remove 1
+                </button>
+            </div>
+        </div>
+        
+        <!-- Encryption -->
+        <div class="flex-container" id="encryption-list">
+            <div class="encryption-node">
+                <div class="node-type">
+                    <!-- Encryption type -->
+                    <label title="The type of encryption or decryption to perform">Type:</label>
+                    <select name="encryptionType" class="input-encryptionType">
+                        <option value="hexascii">Text to Hex ASCII</option>
+                        <option value="-hexascii">Hex ASCII to Text</option>
+                        <!-- <option value="spiral">Spiral Encrypt</option>
+                        <option value="-spiral">Spiral Decrypt</option> -->
+                        <option value="yee">Yee Encrypt</option>
+                        <option value="-yee">Yee Decrypt</option>
+                    </select>
+                    <br>
+                    <hr>
+                </div>
+                <div class="node-info">
+                    <!-- Encryption info -->
+                    <div class="key">
+                        <label>Key:</label>
+                        <textarea type="text" class="input-key" placeholder="For sequences, separate each term by white space." rows="4" cols="25" style="font-size: small;"></textarea>
+                        <br>
+                    </div>
+                    <div class="repeatCount">
+                        <label>Repeat count:</label>
+                        <input type="number" class="input-repeatCount" value="1">
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activate Encryption -->
+        <div class="flex-container">
+            <div style="text-align: center; width: 15%;">
+                <!-- Button -->
+                <span>Encrypt!</span>
+                <br>
+                <button id="encrypt-button" style="width: 100%;">Enter</button>
             </div>
         </div>
     </body>
-</html>
+    </html>

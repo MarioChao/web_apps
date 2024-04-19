@@ -1,4 +1,13 @@
-// Constants & functions
+// Constants
+const hexValues = {
+    '0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
+    '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+    'a': 10, 'A': 10, 'b': 11, 'B': 11, 'c': 12, 'C': 12,
+    'd': 13, 'D': 13, 'e': 14, 'E': 14, 'f': 15, 'F': 15,
+};
+const decimalValuesHex = invertObject(hexValues);
+
+// Local functions
 function invertObject(object) {
     let ret = {};
     for (let key in object) {
@@ -6,17 +15,6 @@ function invertObject(object) {
     }
     return ret;
 }
-
-const hexValues = {
-    '0': 0, '1': 1, '2': 2, '3': 3, '4': 4,
-    '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
-    'a': 10, 'A': 10, 'b': 11, 'B': 11, 'c': 12, 'C': 12,
-    'd': 13, 'D': 13, 'e': 14, 'E': 14, 'f': 15, 'F': 15
-};
-const decimalValuesHex = invertObject(hexValues);
-
-// Function module
-let functionModule = {};
 
 function hexToDecimal(hex) {
     // Convert hex to decimal
@@ -81,7 +79,9 @@ function textToHexAscii(plaintext) {
     return ciphertext;
 }
 
-function hexAsciiToTextFull(text, key, repeatCount) {
+function hexAsciiToTextFull(text, nodeInfo) {
+    let repeatCount = nodeInfo.repeatCount;
+
     let plaintext = text;
     for (let i = 0; i < repeatCount; i++) {
         plaintext = hexAsciiToText(plaintext);
@@ -89,10 +89,12 @@ function hexAsciiToTextFull(text, key, repeatCount) {
     return plaintext;
 }
 
-function textToHexAsciiFull(text, key, repeatCount) {
+function textToHexAsciiFull(text, nodeInfo) {
+    let repeatCount = nodeInfo.repeatCount;
     if (repeatCount > 15) {
         return "Repeat count too big! (>15)";
     }
+    
     let ciphertext = text;
     for (let i = 0; i < repeatCount; i++) {
         ciphertext = textToHexAscii(ciphertext);
@@ -100,7 +102,27 @@ function textToHexAsciiFull(text, key, repeatCount) {
     return ciphertext;
 }
 
+function getHexAsciiToTextNodeParameter() {
+    return {
+        key : false,
+        repeatCount : true,
+    }
+}
+
+function getTextToHexAsciiNodeParameter() {
+    return {
+        key : false,
+        repeatCount : true,
+    }
+}
+
+// Function module
+let functionModule = {};
+
 functionModule.hexAsciiToText = hexAsciiToTextFull;
 functionModule.textToHexAscii = textToHexAsciiFull;
+
+functionModule.hexAsciiToTextNodeParameter = getHexAsciiToTextNodeParameter();
+functionModule.textToHexAsciiNodeParameter = getTextToHexAsciiNodeParameter();
 
 export {functionModule};

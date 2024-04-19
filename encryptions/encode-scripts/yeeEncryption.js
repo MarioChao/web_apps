@@ -3,10 +3,10 @@ const minAscii = '!'.charCodeAt(); // 33
 const maxAscii = '~'.charCodeAt(); // 126
 const spaceReplace = '€';
 
-// Function module
-let functionModule = {};
+// Variables
 let keySequence = [0];
 
+// Local functions
 function getDefaultKey() {
     return [1, -2, 1, -3, 3, -2, 1, -2, 5, -5, 2, -3, 2, -4, 4, -5, 6, -5];
 }
@@ -66,17 +66,43 @@ function yeeEncrypt(plaintext, repeatedCount, decrypt) {
     return ciphertext;
 }
 
-function yeeEncryptFull(text, key, repeatCount) {
+function yeeEncryptFull(text, nodeInfo) {
+    let key = nodeInfo.key;
+    let repeatCount = nodeInfo.repeatCount;
+    
     parseKey(key);
     return yeeEncrypt(text, repeatCount);
 }
 
-function yeeDecryptFull(text, key, repeatCount) {
+function yeeDecryptFull(text, nodeInfo) {
+    let key = nodeInfo.key;
+    let repeatCount = nodeInfo.repeatCount;
+
     parseKey(key);
     return yeeEncrypt(text, repeatCount, true);
 }
 
+function getYeeEncryptNodeParameter() {
+    return {
+        key : true,
+        repeatCount : true,
+    }
+}
+
+function getYeeDecryptNodeParameter() {
+    return {
+        key : true,
+        repeatCount : true,
+    }
+}
+
+// Function module
+let functionModule = {};
+
 functionModule.yeeEncrypt = yeeEncryptFull;
 functionModule.yeeDecrypt = yeeDecryptFull;
+
+functionModule.yeeEncryptNodeParameter = getYeeEncryptNodeParameter();
+functionModule.yeeDecryptNodeParameter = getYeeDecryptNodeParameter();
 
 export {functionModule};
