@@ -28,7 +28,7 @@ function parseKey(key) {
         }
         keySequence = tmpKeySequence;
     }
-    console.log("yee sequence:", keySequence);
+    // console.log("yee sequence:", keySequence);
 }
 
 function rangeMod(number, minNum, maxNum) {
@@ -38,6 +38,7 @@ function rangeMod(number, minNum, maxNum) {
     return ret;
 }
 
+// Encryption functions
 function yeeEncrypt(plaintext, repeatedCount, decrypt) {
     if (plaintext == null) {
         return;
@@ -67,42 +68,56 @@ function yeeEncrypt(plaintext, repeatedCount, decrypt) {
 }
 
 function yeeEncryptFull(text, nodeInfo) {
-    let key = nodeInfo.key;
-    let repeatCount = nodeInfo.repeatCount;
+    // Get variables
+    parseKey(nodeInfo.key);
+    let repeatCount = parseInt(nodeInfo.repeatCount);
     
-    parseKey(key);
-    return yeeEncrypt(text, repeatCount);
+    // Encrypt
+    let resultText = yeeEncrypt(text, repeatCount);
+
+    // Return
+    return {
+        result : resultText,
+        success : true,
+    };
 }
 
 function yeeDecryptFull(text, nodeInfo) {
-    let key = nodeInfo.key;
-    let repeatCount = nodeInfo.repeatCount;
+    // Get variables
+    parseKey(nodeInfo.key);
+    let repeatCount = parseInt(nodeInfo.repeatCount);
 
-    parseKey(key);
-    return yeeEncrypt(text, repeatCount, true);
+    // Encrypt
+    let resultText = yeeEncrypt(text, repeatCount, true);
+    
+    // Return
+    return {
+        result : resultText,
+        success : true,
+    };
 }
 
 function getYeeEncryptNodeParameter() {
     return {
         key : true,
         repeatCount : true,
-    }
+    };
 }
 
 function getYeeDecryptNodeParameter() {
     return {
         key : true,
         repeatCount : true,
-    }
+    };
 }
 
 // Function module
 let functionModule = {};
 
-functionModule.yeeEncrypt = yeeEncryptFull;
-functionModule.yeeDecrypt = yeeDecryptFull;
+functionModule.encrypt = yeeEncryptFull;
+functionModule.decrypt = yeeDecryptFull;
 
-functionModule.yeeEncryptNodeParameter = getYeeEncryptNodeParameter();
-functionModule.yeeDecryptNodeParameter = getYeeDecryptNodeParameter();
+functionModule.encryptNodeParameter = getYeeEncryptNodeParameter();
+functionModule.decryptNodeParameter = getYeeDecryptNodeParameter();
 
-export {functionModule};
+export { functionModule };

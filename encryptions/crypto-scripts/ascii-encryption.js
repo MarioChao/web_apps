@@ -10,7 +10,7 @@ const decimalValuesHex = invertObject(hexValues);
 // Local functions
 function invertObject(object) {
     let ret = {};
-    for (let key in object) {
+    for (let key of Object.keys(object)) {
         ret[object[key]] = key;
     }
     return ret;
@@ -39,28 +39,7 @@ function decimalToHex(decimal) {
     return ret;
 }
 
-function hexAsciiToText(plaintext) {
-    // Encrypt (decrypt)
-    let ciphertext = "";
-    let tmpHex = "";
-    for (let c of plaintext.toString().split('')) {
-        // Get character if is hex
-        if (Object.keys(hexValues).includes(c)) {
-            tmpHex += c;
-        }
-        // When hex is complete (2 digits)
-        if (tmpHex.length == 2) {
-            // Get decimal
-            let tmpDecimal = hexToDecimal(tmpHex);
-            // Add to ciphertext
-            ciphertext += String.fromCharCode(tmpDecimal);
-            // Reset hex
-            tmpHex = "";
-        }
-    }
-    return ciphertext;
-}
-
+// Encryption functions
 function textToHexAscii(plaintext) {
     // Encrypt (decrypt)
     let ciphertext = "";
@@ -79,50 +58,89 @@ function textToHexAscii(plaintext) {
     return ciphertext;
 }
 
-function hexAsciiToTextFull(text, nodeInfo) {
-    let repeatCount = nodeInfo.repeatCount;
-
-    let plaintext = text;
-    for (let i = 0; i < repeatCount; i++) {
-        plaintext = hexAsciiToText(plaintext);
-    }
-    return plaintext;
-}
-
-function textToHexAsciiFull(text, nodeInfo) {
-    let repeatCount = nodeInfo.repeatCount;
-    if (repeatCount > 15) {
-        return "Repeat count too big! (>15)";
-    }
-    
-    let ciphertext = text;
-    for (let i = 0; i < repeatCount; i++) {
-        ciphertext = textToHexAscii(ciphertext);
+function hexAsciiToText(plaintext) {
+    // Encrypt (decrypt)
+    let ciphertext = "";
+    let tmpHex = "";
+    for (let c of plaintext.toString().split('')) {
+        // Get character if it's hex
+        if (Object.keys(hexValues).includes(c)) {
+            tmpHex += c;
+        }
+        // When hex is complete (2 digits)
+        if (tmpHex.length == 2) {
+            // Get decimal
+            let tmpDecimal = hexToDecimal(tmpHex);
+            // Add to ciphertext
+            ciphertext += String.fromCharCode(tmpDecimal);
+            // Reset hex
+            tmpHex = "";
+        }
     }
     return ciphertext;
 }
 
-function getHexAsciiToTextNodeParameter() {
-    return {
-        key : false,
-        repeatCount : true,
+function textToHexAsciiFull(text, nodeInfo) {
+    // Get variables
+    let repeatCount = parseInt(nodeInfo.repeatCount);
+    
+    // Validate repeat count
+    if (repeatCount > 10) {
+        return {
+            result : "Repeat count too big! (>10)",
+            success : false,
+        };
     }
+    
+    // Encrypt
+    let ciphertext = text;
+    for (let i = 0; i < repeatCount; i++) {
+        ciphertext = textToHexAscii(ciphertext);
+    }
+
+    // Return
+    return {
+        result : ciphertext,
+        success : true,
+    };
+}
+
+function hexAsciiToTextFull(text, nodeInfo) {
+    // Get variables
+    let repeatCount = parseInt(nodeInfo.repeatCount);
+
+    // Encrypt
+    let plaintext = text;
+    for (let i = 0; i < repeatCount; i++) {
+        plaintext = hexAsciiToText(plaintext);
+    }
+    
+    // Return
+    return {
+        result : plaintext,
+        success : true,
+    };
 }
 
 function getTextToHexAsciiNodeParameter() {
     return {
-        key : false,
         repeatCount : true,
-    }
+    };
+}
+
+function getHexAsciiToTextNodeParameter() {
+    return {
+        repeatCount : true,
+    };
 }
 
 // Function module
 let functionModule = {};
 
-functionModule.hexAsciiToText = hexAsciiToTextFull;
 functionModule.textToHexAscii = textToHexAsciiFull;
+functionModule.hexAsciiToText = hexAsciiToTextFull;
 
-functionModule.hexAsciiToTextNodeParameter = getHexAsciiToTextNodeParameter();
 functionModule.textToHexAsciiNodeParameter = getTextToHexAsciiNodeParameter();
+functionModule.hexAsciiToTextNodeParameter = getHexAsciiToTextNodeParameter();
 
-export {functionModule};
+export { functionModule };
