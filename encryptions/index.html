@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Encryptions</title>
-        <script type="module" src="./encryptionMain.js"></script>
+        <script type="module" src="./encryption-main.js"></script>
         <style>
             .flex-container {
                 display: flex;
@@ -62,10 +62,11 @@
                     <!-- Encryption type -->
                     <label title="The type of encryption or decryption to perform">Type:</label>
                     <select name="encryptionType" class="input-encryptionType">
+                        <option value="regexmatch">Regex Match</option>
+                        <option value="spiral">Spiral Encrypt</option>
+                        <option value="-spiral">Spiral Decrypt</option>
                         <option value="hexascii">Text to Hex ASCII</option>
                         <option value="-hexascii">Hex ASCII to Text</option>
-                        <!-- <option value="spiral">Spiral Encrypt</option>
-                        <option value="-spiral">Spiral Decrypt</option> -->
                         <option value="yee">Yee Encrypt</option>
                         <option value="-yee">Yee Decrypt</option>
                     </select>
@@ -76,11 +77,47 @@
                     <!-- Encryption info -->
                     <div class="key">
                         <label>Key:</label>
-                        <textarea type="text" class="input-key" placeholder="For sequences, separate each term by white space." rows="4" cols="25" style="font-size: small;"></textarea>
+                        <textarea type="text" class="input-key" placeholder="For sequences, separate each term by white space." rows="3" cols="25" style="font-size: small;"></textarea>
                         <br>
                     </div>
+                    <div class="pattern">
+                        <label>Regex:</label>
+                        <textarea type="text" class="input-pattern" placeholder="Regular expression pattern." rows="3" cols="23" style="font-size: small;"></textarea>
+                        <br>
+                    </div>
+                    <div class="matchId">
+                        <label>Match Id:</label>
+                        <input type="number" class="input-matchId" value="0">
+                        <br>
+                    </div>
+                    <div class="groupId">
+                        <label>Group Id:</label>
+                        <input type="number" class="input-groupId" value="0">
+                        <br>
+                    </div>
+                    <div class="rows">
+                        <label>Rows:</label>
+                        <input type="number" class="input-rows" value="5">
+                        <br>
+                    </div>
+                    <div class="columns">
+                        <label>Columns:</label>
+                        <input type="number" class="input-columns" value="10">
+                        <br>
+                    </div>
+                    <div class="phase">
+                        <label title="0:U, 1:R, 2:D, 3:L">Phase:</label>
+                        <input type="number" class="input-phase" value="0">
+                        <br>
+                    </div>
+                    <div class="clockwise">
+                        <label>Clockwise:</label>
+                        <input type="checkbox" class="input-clockwise" value="clockwise" checked>
+                        <br>
+                    </div>
+                    <hr>
                     <div class="repeatCount">
-                        <label>Repeat count:</label>
+                        <label>Repeat:</label>
                         <input type="number" class="input-repeatCount" value="1">
                         <br>
                     </div>
