@@ -1,3 +1,6 @@
+// Spiral Cipher
+// Arrange the plaintext into a letter grid, then retrieve characters on a spiral
+
 // Constants
 const edgeIndexes = [[1, 1, 0, 0], [0, 0, 1, 1]];
 

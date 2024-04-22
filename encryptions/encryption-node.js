@@ -4,6 +4,7 @@ import { functionModule as yeeEncryption } from "./crypto-scripts/yee-encryption
 import { functionModule as asciiEncryption } from "./crypto-scripts/ascii-encryption.js";
 import { functionModule as spiralEncryption } from "./crypto-scripts/spiral-encryption.js";
 import { functionModule as regexEncryption } from "./crypto-scripts/regex-match.js";
+import { functionModule as vigenereEncryption } from "./crypto-scripts/vigenere-encryption.js";
 
 // Variables
 let encryptionListElement;
@@ -27,6 +28,8 @@ function setUpFunctionTable() {
     functionTable["spiral"] = spiralEncryption.encrypt;
     functionTable["-spiral"] = spiralEncryption.decrypt;
     functionTable["regexmatch"] = regexEncryption.match;
+    functionTable["vigenere"] = vigenereEncryption.encrypt;
+    functionTable["-vigenere"] = vigenereEncryption.decrypt;
 }
 
 function setUpNodeParameterTable() {
@@ -37,6 +40,8 @@ function setUpNodeParameterTable() {
     nodeParameterTable["spiral"] = spiralEncryption.encryptNodeParameter;
     nodeParameterTable["-spiral"] = spiralEncryption.decryptNodeParameter;
     nodeParameterTable["regexmatch"] = regexEncryption.nodeParameter;
+    nodeParameterTable["vigenere"] = vigenereEncryption.encryptNodeParameter;
+    nodeParameterTable["-vigenere"] = vigenereEncryption.decryptNodeParameter;
 }
 
 // Node functions
@@ -76,6 +81,7 @@ function setUpEncryptionNode(nodeElement) {
     // Set up event
     encryptionTypeElement.addEventListener("change", function() { updateEncryptionNodeInfo(nodeInfoElement, encryptionTypeElement) });
     updateEncryptionNodeInfo(nodeInfoElement, encryptionTypeElement);
+    nodeInfoElement.style.display = "block";
 }
 
 function addEncryptionNode(amount) {

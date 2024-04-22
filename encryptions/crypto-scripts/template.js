@@ -1,3 +1,5 @@
+// Template Cipher
+
 // Constants
 
 // Variables
@@ -17,14 +19,26 @@ function someEncryptFull(text, nodeInfo) {
     // Get variables
     // Validate
     // Encrypt
+    let resultText;
+    
     // Return
+    return {
+        result : resultText,
+        success : true,
+    };
 }
 
 function someDecryptFull(text, nodeInfo) {
     // Get variables
     // Validate
     // Encrypt
+    let resultText;
+
     // Return
+    return {
+        result : resultText,
+        success : true,
+    };
 }
 
 function getSomeEncryptNodeParameter() {

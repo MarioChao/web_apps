@@ -1,3 +1,7 @@
+// Yee Cipher
+// Custom type of Vigenère cipher, with numeral keys and ascii characters
+// The key sequence won't skip over any character (unlike non-letters in Vigenère)
+
 // Constants
 const minAscii = '!'.charCodeAt(); // 33
 const maxAscii = '~'.charCodeAt(); // 126
@@ -39,25 +43,32 @@ function rangeMod(number, minNum, maxNum) {
 }
 
 // Encryption functions
-function yeeEncrypt(plaintext, repeatedCount, decrypt) {
-    if (plaintext == null) {
-        return;
-    }
-    decrypt = (decrypt == true);
+function yeeEncrypt(plaintext, repeatCount, isDecrypt) {
+    // Validate paraemters (for when isDecrypt == null)
+    isDecrypt = (isDecrypt == true);
+
+    // Reduce repeat count
+    repeatCount %= (maxAscii - minAscii + 1);
+
     // Encrypt / decrypt text
     let ciphertext = "";
     let keySize = keySequence.length;
     let sequenceId = 0;
     for (let c of plaintext.toString().split('')) {
         let cFinal = c;
-        if (c == ' ') cFinal = (repeatedCount % 2 == 0 ? ' ' : spaceReplace);
-        else if (c == spaceReplace) cFinal = (repeatedCount % 2 == 1 ? ' ' : spaceReplace);
-        else if (minAscii <= c.charCodeAt() && c.charCodeAt() <= maxAscii) {
+        if (c == ' ') {
+            // Swap space with spaceReplace
+            cFinal = (repeatCount % 2 == 0 ? ' ' : spaceReplace);
+        } else if (c == spaceReplace) {
+            // Swap spaceReplace with space
+            cFinal = (repeatCount % 2 == 1 ? ' ' : spaceReplace);
+        } else if (minAscii <= c.charCodeAt() && c.charCodeAt() <= maxAscii) {
+            // Shift the character in the ASCII range
             let charNum;
-            if (decrypt == false) {
-                charNum = rangeMod(c.charCodeAt() + keySequence[sequenceId % keySize] * repeatedCount, minAscii, maxAscii);
+            if (isDecrypt == false) {
+                charNum = rangeMod(c.charCodeAt() + keySequence[sequenceId % keySize] * repeatCount, minAscii, maxAscii);
             } else {
-                charNum = rangeMod(c.charCodeAt() - keySequence[sequenceId % keySize] * repeatedCount, minAscii, maxAscii);
+                charNum = rangeMod(c.charCodeAt() - keySequence[sequenceId % keySize] * repeatCount, minAscii, maxAscii);
             }
             cFinal = String.fromCharCode(charNum);
         }
