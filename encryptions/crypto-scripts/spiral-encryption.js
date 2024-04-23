@@ -123,6 +123,7 @@ function spiralDecrypt(text, rows, columns, phase, clockwise) {
     return resultText;
 }
 
+// Encrypt node functions
 function spiralEncryptFull(text, nodeInfo) {
     // Get variables
     let rows = parseInt(nodeInfo.rows);

@@ -78,6 +78,7 @@ function yeeEncrypt(plaintext, repeatCount, isDecrypt) {
     return ciphertext;
 }
 
+// Encrypt node functions
 function yeeEncryptFull(text, nodeInfo) {
     // Get variables
     parseKey(nodeInfo.key);

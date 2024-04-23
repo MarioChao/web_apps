@@ -15,6 +15,7 @@ function someDecrypt() {
 
 }
 
+// Encrypt node functions
 function someEncryptFull(text, nodeInfo) {
     // Get variables
     // Validate

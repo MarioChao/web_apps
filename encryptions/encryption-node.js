@@ -27,7 +27,8 @@ function setUpFunctionTable() {
     functionTable["-hexascii"] = asciiEncryption.hexAsciiToText;
     functionTable["spiral"] = spiralEncryption.encrypt;
     functionTable["-spiral"] = spiralEncryption.decrypt;
-    functionTable["regexmatch"] = regexEncryption.match;
+    functionTable["regexmatch"] = regexEncryption.matchAll;
+    functionTable["regexmatchsingle"] = regexEncryption.matchSingleGroup;
     functionTable["vigenere"] = vigenereEncryption.encrypt;
     functionTable["-vigenere"] = vigenereEncryption.decrypt;
 }
@@ -39,7 +40,8 @@ function setUpNodeParameterTable() {
     nodeParameterTable["-hexascii"] = asciiEncryption.hexAsciiToTextNodeParameter;
     nodeParameterTable["spiral"] = spiralEncryption.encryptNodeParameter;
     nodeParameterTable["-spiral"] = spiralEncryption.decryptNodeParameter;
-    nodeParameterTable["regexmatch"] = regexEncryption.nodeParameter;
+    nodeParameterTable["regexmatch"] = regexEncryption.allNodeParameter;
+    nodeParameterTable["regexmatchsingle"] = regexEncryption.groupNodeParameter;
     nodeParameterTable["vigenere"] = vigenereEncryption.encryptNodeParameter;
     nodeParameterTable["-vigenere"] = vigenereEncryption.decryptNodeParameter;
 }
@@ -73,8 +75,8 @@ function updateEncryptionNodeInfo(nodeInfoElement, encryptionTypeElement) {
 function setUpEncryptionNode(nodeElement) {
     // Get contents
     let nodeChildren = nodeElement.children;
-    let nodeTypeElement = nodeChildren[0];
-    let nodeInfoElement = nodeChildren[1];
+    let nodeTypeElement = nodeChildren[1];
+    let nodeInfoElement = nodeChildren[2];
 
     let encryptionTypeElement = getChildWithClass(nodeTypeElement, "input-encryptionType");
 
@@ -82,6 +84,7 @@ function setUpEncryptionNode(nodeElement) {
     encryptionTypeElement.addEventListener("change", function() { updateEncryptionNodeInfo(nodeInfoElement, encryptionTypeElement) });
     updateEncryptionNodeInfo(nodeInfoElement, encryptionTypeElement);
     nodeInfoElement.style.display = "block";
+    setUpNodeState(nodeElement);
 }
 
 function addEncryptionNode(amount) {
@@ -119,13 +122,78 @@ function setUpDefaultEncryptionNode() {
     }
 }
 
+// Node state functions
+function getNodeStates(nodeElement) {
+    // Get state elements
+    let nodeChildren = nodeElement.children;
+    let nodeStatesElement = nodeChildren[0];
+    let nodeDisabledButton = getChildWithClass(nodeStatesElement, "node-disabled-state");
+    let nodeBreakpointButton = getChildWithClass(nodeStatesElement, "node-breakpoint-state");
+    
+    // Get state
+    let resultStates = {};
+    resultStates.disabled = (nodeDisabledButton.value == "true");
+    resultStates.breakpoint = (nodeBreakpointButton.value == "true");
+    return resultStates;
+}
+
+function switchNodeState(stateButton) {
+    // Change / toggle state
+    let buttonClassList = stateButton.classList;
+    let isPressed = buttonClassList.toggle("state-pressed");
+    let newState;
+    if (isPressed) {
+        newState = "true";
+    } else {
+        newState = "false";
+    }
+    stateButton.value = newState;
+}
+
+function updateNodeState(nodeElement) {
+    // Get states
+    let nodeStates = getNodeStates(nodeElement);
+    let nodeClassList = nodeElement.classList;
+
+    // Update node's state visually
+    nodeClassList.remove("state-default", "state-disabled", "state-breakpoint");
+    if (nodeStates.disabled) {
+        nodeClassList.add("state-disabled");
+    } else if (nodeStates.breakpoint) {
+        nodeClassList.add("state-breakpoint");
+    } else {
+        nodeClassList.add("state-default");
+    }
+}
+
+function setUpNodeState(nodeElement) {
+    // Get state element
+    let nodeChildren = nodeElement.children;
+    let nodeStatesElement = nodeChildren[0];
+
+    // Go through states
+    let nodeStatesChildren = nodeStatesElement.children;
+    for (let i = 0; i < nodeStatesChildren.length; i++) {
+        // Validate button
+        let stateButton = nodeStatesChildren[i];
+        if (stateButton.nodeName != "BUTTON") {
+            continue;
+        }
+
+        // Set up event
+        stateButton.addEventListener("click", function() {
+            switchNodeState(stateButton);
+            updateNodeState(nodeElement);
+        });
+    }
+}
+
 // Node encryption function
 function activateEncryptionNode(nodeElement, inputText) {
     // Get node's child elements
     let nodeChildren = nodeElement.children;
-    // console.log(nodeChildren);
-    let nodeTypeElement = nodeChildren[0];
-    let nodeInfoElement = nodeChildren[1];
+    let nodeTypeElement = nodeChildren[1];
+    let nodeInfoElement = nodeChildren[2];
     
     // Validate encryption type
     let encryptionTypeElement = getChildWithClass(nodeTypeElement, "input-encryptionType");
@@ -181,6 +249,7 @@ let nodeModule = {};
 nodeModule.initialSetUp = initialSetUpNodeModule;
 nodeModule.loadedSetUp = loadedSetUpNodeModule;
 nodeModule.addNode = addEncryptionNode;
+nodeModule.getNodeStates = getNodeStates;
 nodeModule.activate = activateEncryptionNode;
 
 export { nodeModule };

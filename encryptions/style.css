@@ -1,0 +1,52 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.flex-container > div {
+    margin: 10px;
+    padding: 10px;
+    border: 3px solid black;
+}
+
+/* For encryption nodes */
+.state-default {
+    background-color: #d3fdd3;
+}
+.state-disabled {
+    background-color: #f2f2f2;
+}
+.state-breakpoint {
+    background-color: #ffd6d6;
+}
+
+.transparent {
+    background-color: transparent;
+    border: none;
+}
+
+.node-disabled-state {
+    background: url('../assets/images/disable.png') no-repeat top center;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+}
+.node-breakpoint-state {
+    background: url('../assets/images/breakpoint.png') no-repeat top center;
+    background-size: contain;
+    width: 20px;
+    height: 20px;
+}
+.state-pressed {
+    background-color: #6bb0ffb0;
+    background-blend-mode: color-burn;
+}
+
+/* HTML elements */
+button {
+    cursor: pointer;
+}
+textarea {
+    resize: none;
+}

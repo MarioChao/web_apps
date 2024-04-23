@@ -26,10 +26,21 @@ function startEncryption() {
     let startText = text;
     let encryptionResult;
     for (let i = 0; i < encryptionNodes.length; i++) {
+        // Validate node
         let node = encryptionNodes[i];
         if (!hasClass(node, "encryption-node")) {
             continue;
         }
+
+        // Check node state
+        let nodeStates = nodeModule.getNodeStates(node);
+        if (nodeStates.disabled == true) {
+            continue;
+        } else if (nodeStates.breakpoint == true) {
+            break;
+        }
+
+        // Encrypt
         encryptionResult = nodeModule.activate(node, startText);
         startText = encryptionResult.result;
         if (!encryptionResult.success) {
@@ -38,13 +49,18 @@ function startEncryption() {
     }
     
     // Result
-    encryptionResultElement.innerText = encryptionResult.result;
+    encryptionResultElement.value = startText;
 }
 
 function onDOMContentLoaded() {
-    document.getElementById("encrypt-button").addEventListener("click", startEncryption);
-    document.getElementById("add-encryption-node").addEventListener("click", function() { nodeModule.addNode(1); });
-    document.getElementById("remove-encryption-node").addEventListener("click", function() { nodeModule.addNode(-1); });
+    let encryptButton = document.getElementById("encrypt-button");
+    let addNodeButton = document.getElementById("add-encryption-node");
+    let removeNodeButton = document.getElementById("remove-encryption-node");
+
+    encryptButton.addEventListener("click", startEncryption);
+    addNodeButton.addEventListener("click", function() { nodeModule.addNode(1); });
+    removeNodeButton.addEventListener("click", function() { nodeModule.addNode(-1); });
+
     nodeModule.loadedSetUp();
 }
 

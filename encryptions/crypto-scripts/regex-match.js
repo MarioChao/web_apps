@@ -4,28 +4,50 @@
 // More about Regular Expression: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
 
 // Local functions
-function getRegexMatchAll(text, pattern) {
+function getRegexMatchGlobalAll(text, pattern) {
     const re = new RegExp(pattern, "g");
-    return text.matchAll(re);
+    let matches = text.matchAll(re);
+    return matches;
+}
+
+function getRegexMatchGlobal(text, pattern) {
+    const re = new RegExp(pattern, "g");
+    let matches = text.match(re);
+    return matches;
+}
+
+function getRegexMatchesString(text, pattern, separator) {
+    let realSeparator = separator || "";
+
+    const matches = getRegexMatchGlobal(text, pattern);
+    let matchesArray = [...matches];
+    let matchesString = matchesArray.join(realSeparator);
+    return matchesString;
 }
 
 // Encryption functions
-function regexMatch(text, pattern, matchId, groupId) {
-    const matches = getRegexMatchAll(text, pattern);
+function regexMatchSingleGroup(text, pattern, matchId, groupId) {
+    const matches = getRegexMatchGlobalAll(text, pattern);
     let matchesArray = [...matches];
     let match = matchesArray[matchId];
-    let group = match && match[groupId];
-    return group;
+    let resultGroup = match && match[groupId];
+    return resultGroup;
 }
 
-function regexMatchFull(text, nodeInfo) {
+function regexMatchAll(text, pattern) {
+    let resultString = getRegexMatchesString(text, pattern, "\n");
+    return resultString;
+}
+
+// Encrypt node functions
+function regexMatchSingleGroupFull(text, nodeInfo) {
     // Get variables
     let pattern = nodeInfo.pattern;
     let matchId = nodeInfo.matchId;
     let groupId = nodeInfo.groupId;
 
     // Encrypt
-    let resultText = regexMatch(text, pattern, matchId, groupId);
+    let resultText = regexMatchSingleGroup(text, pattern, matchId, groupId);
     if (!resultText) {
         return {
             result : "Regular expression match failed!",
@@ -40,7 +62,27 @@ function regexMatchFull(text, nodeInfo) {
     };
 }
 
-function getRegexMatchNodeParameter() {
+function regexMatchAllFull(text, nodeInfo) {
+    // Get variables
+    let pattern = nodeInfo.pattern;
+
+    // Encrypt
+    let resultText = regexMatchAll(text, pattern);
+    if (!resultText) {
+        return {
+            result : "Regular expression match failed!",
+            success : false,
+        };
+    }
+
+    // Return
+    return {
+        result : resultText,
+        success : true,
+    };
+}
+
+function getRegexMatchSingleGroupNodeParameter() {
     return {
         pattern : true,
         matchId : true,
@@ -48,11 +90,19 @@ function getRegexMatchNodeParameter() {
     };
 }
 
+function getRegexMatchAllNodeParameter() {
+    return {
+        pattern : true,
+    };
+}
+
 // Function module
 let functionModule = {};
 
-functionModule.match = regexMatchFull;
+functionModule.matchSingleGroup = regexMatchSingleGroupFull;
+functionModule.matchAll = regexMatchAllFull;
 
-functionModule.nodeParameter = getRegexMatchNodeParameter();
+functionModule.groupNodeParameter = getRegexMatchSingleGroupNodeParameter();
+functionModule.allNodeParameter = getRegexMatchAllNodeParameter();
 
 export { functionModule };

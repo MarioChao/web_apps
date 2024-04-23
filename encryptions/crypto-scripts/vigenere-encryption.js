@@ -108,6 +108,7 @@ function vigenereDecrypt(text, key, repeatCount) {
     return vigenereEncrypt(text, key, -repeatCount);
 }
 
+// Encrypt node functions
 function vigenereEncryptFull(text, nodeInfo) {
     // Get variables
     let key = parseKey(nodeInfo.key);

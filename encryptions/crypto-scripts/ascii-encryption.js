@@ -83,6 +83,7 @@ function hexAsciiToText(plaintext) {
     return ciphertext;
 }
 
+// Encrypt node functions
 function textToHexAsciiFull(text, nodeInfo) {
     // Get variables
     let repeatCount = parseInt(nodeInfo.repeatCount);
