@@ -62,7 +62,7 @@ function updateEncryptionNodeInfo(nodeInfoElement, encryptionTypeElement) {
     for (let i = 0; i < nodeInfoChildren.length; i++) {
         let infoElement = nodeInfoChildren[i];
         let infoName = infoElement.className;
-        let isDiv = (infoElement.nodeName == "DIV");
+        let isDiv = (infoElement.nodeName === "DIV");
 
         if (!isDiv || nodeParameter[infoName]) {
             infoElement.style.display = "block";
@@ -132,8 +132,8 @@ function getNodeStates(nodeElement) {
     
     // Get state
     let resultStates = {};
-    resultStates.disabled = (nodeDisabledButton.value == "true");
-    resultStates.breakpoint = (nodeBreakpointButton.value == "true");
+    resultStates.disabled = (nodeDisabledButton.value === "true");
+    resultStates.breakpoint = (nodeBreakpointButton.value === "true");
     return resultStates;
 }
 
@@ -221,7 +221,7 @@ function activateEncryptionNode(nodeElement, inputText) {
             console.warn("Failed to get element " + infoName.toString() + "!");
             continue;
         }
-        if (infoInputElement.type == "checkbox") {
+        if (infoInputElement.type === "checkbox") {
             nodeInfo[infoName] = infoInputElement.checked;
         } else {
             nodeInfo[infoName] = infoInputElement.value;

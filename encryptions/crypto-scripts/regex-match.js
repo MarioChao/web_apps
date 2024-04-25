@@ -20,8 +20,8 @@ function getRegexMatchesString(text, pattern, separator) {
     let realSeparator = separator || "";
 
     const matches = getRegexMatchGlobal(text, pattern);
-    let matchesArray = [...matches];
-    let matchesString = matchesArray.join(realSeparator);
+    let matchesArray = matches && [...matches];
+    let matchesString = matchesArray && matchesArray.join(realSeparator);
     return matchesString;
 }
 
