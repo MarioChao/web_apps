@@ -58,6 +58,7 @@
                     <select name="encryptionType" class="input-encryptionType">
                         <option value="regexmatch">Regular Expression</option>
                         <option value="regexmatchsingle">Regex Capture</option>
+                        <option value="regexreplace">Regex Replace</option>
                         <option value="spiral">Spiral Encrypt</option>
                         <option value="-spiral">Spiral Decrypt</option>
                         <option value="hexascii">Text to Hex ASCII</option>
@@ -90,6 +91,11 @@
                     <div class="groupId">
                         <label>Group Id:</label>
                         <input type="number" class="input-groupId" value="0">
+                        <br>
+                    </div>
+                    <div class="replaceText">
+                        <label>Replace:</label>
+                        <textarea type="text" class="input-replaceText" placeholder="Plaintext to replace with." rows="3" cols="23" style="font-size: small;"></textarea>
                         <br>
                     </div>
                     <div class="rows">

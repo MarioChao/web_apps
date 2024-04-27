@@ -3,7 +3,7 @@ import { hasClass, getChildWithClass } from "./helper-scripts/get-child.js";
 import { functionModule as yeeEncryption } from "./crypto-scripts/yee-encryption.js";
 import { functionModule as asciiEncryption } from "./crypto-scripts/ascii-encryption.js";
 import { functionModule as spiralEncryption } from "./crypto-scripts/spiral-encryption.js";
-import { functionModule as regexEncryption } from "./crypto-scripts/regex-match.js";
+import { functionModule as regexEncryption } from "./crypto-scripts/regex.js";
 import { functionModule as vigenereEncryption } from "./crypto-scripts/vigenere-encryption.js";
 
 // Variables
@@ -29,6 +29,7 @@ function setUpFunctionTable() {
     functionTable["-spiral"] = spiralEncryption.decrypt;
     functionTable["regexmatch"] = regexEncryption.matchAll;
     functionTable["regexmatchsingle"] = regexEncryption.matchSingleGroup;
+    functionTable["regexreplace"] = regexEncryption.replaceAll;
     functionTable["vigenere"] = vigenereEncryption.encrypt;
     functionTable["-vigenere"] = vigenereEncryption.decrypt;
 }
@@ -42,6 +43,7 @@ function setUpNodeParameterTable() {
     nodeParameterTable["-spiral"] = spiralEncryption.decryptNodeParameter;
     nodeParameterTable["regexmatch"] = regexEncryption.allNodeParameter;
     nodeParameterTable["regexmatchsingle"] = regexEncryption.groupNodeParameter;
+    nodeParameterTable["regexreplace"] = regexEncryption.replaceNodeParameter;
     nodeParameterTable["vigenere"] = vigenereEncryption.encryptNodeParameter;
     nodeParameterTable["-vigenere"] = vigenereEncryption.decryptNodeParameter;
 }

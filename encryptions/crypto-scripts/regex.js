@@ -28,7 +28,7 @@ function getRegexMatchesString(text, pattern, separator) {
 // Encryption functions
 function regexMatchSingleGroup(text, pattern, matchId, groupId) {
     const matches = getRegexMatchGlobalAll(text, pattern);
-    let matchesArray = [...matches];
+    let matchesArray = matches && [...matches];
     let match = matchesArray[matchId];
     let resultGroup = match && match[groupId];
     return resultGroup;
@@ -37,6 +37,12 @@ function regexMatchSingleGroup(text, pattern, matchId, groupId) {
 function regexMatchAll(text, pattern) {
     let resultString = getRegexMatchesString(text, pattern, "\n");
     return resultString;
+}
+
+function regexReplace(text, pattern, replaceText) {
+    const re = new RegExp(pattern, "g");
+    let resultText = text.replace(re, replaceText);
+    return resultText;
 }
 
 // Encrypt node functions
@@ -82,6 +88,27 @@ function regexMatchAllFull(text, nodeInfo) {
     };
 }
 
+function regexReplaceFull(text, nodeInfo) {
+    // Get variables
+    let pattern = nodeInfo.pattern;
+    let replaceText = nodeInfo.replaceText;
+
+    // Encrypt
+    let resultText = regexReplace(text, pattern, replaceText);
+    if (!resultText) {
+        return {
+            result : "Regular expression match failed!",
+            success : false,
+        };
+    }
+
+    // Return
+    return {
+        result : resultText,
+        success : true,
+    };
+}
+
 function getRegexMatchSingleGroupNodeParameter() {
     return {
         pattern : true,
@@ -96,13 +123,22 @@ function getRegexMatchAllNodeParameter() {
     };
 }
 
+function getRegexReplaceNodeParameter() {
+    return {
+        pattern: true,
+        replaceText: true,
+    };
+}
+
 // Function module
 let functionModule = {};
 
 functionModule.matchSingleGroup = regexMatchSingleGroupFull;
 functionModule.matchAll = regexMatchAllFull;
+functionModule.replaceAll = regexReplaceFull;
 
 functionModule.groupNodeParameter = getRegexMatchSingleGroupNodeParameter();
 functionModule.allNodeParameter = getRegexMatchAllNodeParameter();
+functionModule.replaceNodeParameter = getRegexReplaceNodeParameter();
 
 export { functionModule };
