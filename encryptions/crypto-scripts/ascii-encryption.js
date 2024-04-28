@@ -91,8 +91,8 @@ function textToHexAsciiFull(text, nodeInfo) {
     // Validate repeat count
     if (repeatCount > 10) {
         return {
-            result : "Repeat count too big! (>10)",
-            success : false,
+            result: "Repeat count too big! (>10)",
+            success: false,
         };
     }
     
@@ -104,8 +104,8 @@ function textToHexAsciiFull(text, nodeInfo) {
 
     // Return
     return {
-        result : ciphertext,
-        success : true,
+        result: ciphertext,
+        success: true,
     };
 }
 
@@ -121,20 +121,20 @@ function hexAsciiToTextFull(text, nodeInfo) {
     
     // Return
     return {
-        result : plaintext,
-        success : true,
+        result: plaintext,
+        success: true,
     };
 }
 
 function getTextToHexAsciiNodeParameter() {
     return {
-        repeatCount : true,
+        repeatCount: true,
     };
 }
 
 function getHexAsciiToTextNodeParameter() {
     return {
-        repeatCount : true,
+        repeatCount: true,
     };
 }
 

@@ -89,8 +89,8 @@ function yeeEncryptFull(text, nodeInfo) {
 
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
@@ -104,22 +104,22 @@ function yeeDecryptFull(text, nodeInfo) {
     
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
 function getYeeEncryptNodeParameter() {
     return {
-        key : true,
-        repeatCount : true,
+        key: true,
+        repeatCount: true,
     };
 }
 
 function getYeeDecryptNodeParameter() {
     return {
-        key : true,
-        repeatCount : true,
+        key: true,
+        repeatCount: true,
     };
 }
 

@@ -15,8 +15,8 @@ function getSpiralIndexes(rows, columns, phase, clockwise) {
     let direction = (phase % 4 + 4) % 4;
     let deltaDirection = (clockwise) ? 1 : -1;
     let bounds = {
-        X : [0, rows - 1],
-        Y : [0, columns - 1],
+        X: [0, rows - 1],
+        Y: [0, columns - 1],
     };
     let spiralIndexes = [];
     
@@ -140,8 +140,8 @@ function spiralEncryptFull(text, nodeInfo) {
         message += "\nThe input should be in one line."
         message += "\n" + (rows * columns).toString() + " ≠ " + text.length.toString();
         return {
-            result : message,
-            success : false,
+            result: message,
+            success: false,
         };
     }
 
@@ -153,8 +153,8 @@ function spiralEncryptFull(text, nodeInfo) {
 
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
@@ -174,8 +174,8 @@ function spiralDecryptFull(text, nodeInfo) {
         message += "\nThe input should be in one line."
         message += "\n" + (rows * columns).toString() + " ≠ " + text.length.toString();
         return {
-            result : message,
-            success : false,
+            result: message,
+            success: false,
         };
     }
     
@@ -187,28 +187,28 @@ function spiralDecryptFull(text, nodeInfo) {
     
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
 function getSpiralEncryptNodeParameter() {
     return {
-        rows : true,
-        columns : true,
-        phase : true,
-        clockwise : true,
-        repeatCount : true,
+        rows: true,
+        columns: true,
+        phase: true,
+        clockwise: true,
+        repeatCount: true,
     };
 }
 
 function getSpiralDecryptNodeParameter() {
     return {
-        rows : true,
-        columns : true,
-        phase : true,
-        clockwise : true,
-        repeatCount : true,
+        rows: true,
+        columns: true,
+        phase: true,
+        clockwise: true,
+        repeatCount: true,
     };
 }
 

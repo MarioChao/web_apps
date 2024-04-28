@@ -56,15 +56,15 @@ function regexMatchSingleGroupFull(text, nodeInfo) {
     let resultText = regexMatchSingleGroup(text, pattern, matchId, groupId);
     if (!resultText) {
         return {
-            result : "Regular expression match failed!",
-            success : false,
+            result: "Regular expression match failed!",
+            success: false,
         };
     }
 
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
@@ -76,15 +76,15 @@ function regexMatchAllFull(text, nodeInfo) {
     let resultText = regexMatchAll(text, pattern);
     if (!resultText) {
         return {
-            result : "Regular expression match failed!",
-            success : false,
+            result: "Regular expression match failed!",
+            success: false,
         };
     }
 
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
@@ -97,29 +97,29 @@ function regexReplaceFull(text, nodeInfo) {
     let resultText = regexReplace(text, pattern, replaceText);
     if (!resultText) {
         return {
-            result : "Regular expression match failed!",
-            success : false,
+            result: "Regular expression match failed!",
+            success: false,
         };
     }
 
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
 function getRegexMatchSingleGroupNodeParameter() {
     return {
-        pattern : true,
-        matchId : true,
-        groupId : true,
+        pattern: true,
+        matchId: true,
+        groupId: true,
     };
 }
 
 function getRegexMatchAllNodeParameter() {
     return {
-        pattern : true,
+        pattern: true,
     };
 }
 

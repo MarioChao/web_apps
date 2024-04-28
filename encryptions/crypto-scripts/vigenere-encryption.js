@@ -119,8 +119,8 @@ function vigenereEncryptFull(text, nodeInfo) {
 
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
@@ -134,22 +134,22 @@ function vigenereDecryptFull(text, nodeInfo) {
 
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
 function getVigenereEncryptNodeParameter() {
     return {
-        key : true,
-        repeatCount : true,
+        key: true,
+        repeatCount: true,
     };
 }
 
 function getVigenereDecryptNodeParameter() {
     return {
-        key : true,
-        repeatCount : true,
+        key: true,
+        repeatCount: true,
     };
 }
 

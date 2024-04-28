@@ -24,8 +24,8 @@ function someEncryptFull(text, nodeInfo) {
     
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
@@ -37,20 +37,20 @@ function someDecryptFull(text, nodeInfo) {
 
     // Return
     return {
-        result : resultText,
-        success : true,
+        result: resultText,
+        success: true,
     };
 }
 
 function getSomeEncryptNodeParameter() {
     return {
-        repeatCount : true,
+        repeatCount: true,
     };
 }
 
 function getSomeDecryptNodeParameter() {
     return {
-        repeatCount : true,
+        repeatCount: true,
     };
 }
 

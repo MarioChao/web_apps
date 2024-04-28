@@ -204,8 +204,8 @@ function activateEncryptionNode(nodeElement, inputText) {
     if (!isValidEncryptType) {
         // Failed encryption
         return {
-            result : "Invalid encryption type (" + encryptionType.toString() + ")",
-            success : false,
+            result: "Invalid encryption type (" + encryptionType.toString() + ")",
+            success: false,
         };
     }
 
