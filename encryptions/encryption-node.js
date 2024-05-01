@@ -5,6 +5,7 @@ import { functionModule as asciiEncryption } from "./crypto-scripts/ascii-encryp
 import { functionModule as spiralEncryption } from "./crypto-scripts/spiral-encryption.js";
 import { functionModule as regexEncryption } from "./crypto-scripts/regex.js";
 import { functionModule as vigenereEncryption } from "./crypto-scripts/vigenere-encryption.js";
+import { functionModule as radixEncryption } from "./crypto-scripts/radix-base.js";
 
 // Variables
 let encryptionListElement;
@@ -32,6 +33,7 @@ function setUpFunctionTable() {
     functionTable["regexreplace"] = regexEncryption.replaceAll;
     functionTable["vigenere"] = vigenereEncryption.encrypt;
     functionTable["-vigenere"] = vigenereEncryption.decrypt;
+    functionTable["radix"] = radixEncryption.encrypt;
 }
 
 function setUpNodeParameterTable() {
@@ -46,6 +48,7 @@ function setUpNodeParameterTable() {
     nodeParameterTable["regexreplace"] = regexEncryption.replaceNodeParameter;
     nodeParameterTable["vigenere"] = vigenereEncryption.encryptNodeParameter;
     nodeParameterTable["-vigenere"] = vigenereEncryption.decryptNodeParameter;
+    nodeParameterTable["radix"] = radixEncryption.encryptNodeParameter;
 }
 
 // Node functions

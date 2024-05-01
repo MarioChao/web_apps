@@ -62,6 +62,7 @@
                         <option value="regexreplace">Regex Replace</option>
                         <option value="spiral">Spiral Encrypt</option>
                         <option value="-spiral">Spiral Decrypt</option>
+                        <option value="radix">Convert Radix Base</option>
                         <option value="hexascii">Text to Hex ASCII</option>
                         <option value="-hexascii">Hex ASCII to Text</option>
                         <option value="vigenere">Vigenere Encrypt</option>
@@ -73,12 +74,7 @@
                     <hr>
                 </div>
                 <div class="node-info" style="display: none;">
-                    <!-- Encryption info -->
-                    <div class="key">
-                        <label>Key:</label>
-                        <textarea type="text" class="input-key" placeholder="For numerical sequences, separate each term by white space." rows="3" cols="25" style="font-size: small;"></textarea>
-                        <br>
-                    </div>
+                    <!-- Regex info -->
                     <div class="pattern">
                         <label>Regex:</label>
                         <textarea type="text" class="input-pattern" placeholder="Regular expression pattern." rows="3" cols="23" style="font-size: small;"></textarea>
@@ -99,6 +95,8 @@
                         <textarea type="text" class="input-replaceText" placeholder="Plaintext to replace with." rows="3" cols="23" style="font-size: small;"></textarea>
                         <br>
                     </div>
+
+                    <!-- Encryption info -->
                     <div class="rows">
                         <label>Rows:</label>
                         <input type="number" class="input-rows" value="5">
@@ -119,9 +117,24 @@
                         <input type="checkbox" class="input-clockwise" value="clockwise" checked>
                         <br>
                     </div>
-
+                    <div class="key">
+                        <label>Key:</label>
+                        <textarea type="text" class="input-key" placeholder="For numerical sequences, separate each term by white space." rows="3" cols="25" style="font-size: small;"></textarea>
+                        <br>
+                    </div>
+                    <div class="radix-from">
+                        <label>From Radix:</label>
+                        <input type="number" class="input-radix-from" value="10">
+                        <br>
+                    </div>
+                    <div class="radix-to">
+                        <label>To Radix:</label>
+                        <input type="number" class="input-radix-to" value="2">
+                        <br>
+                    </div>
+                    
                     <hr>
-
+                    
                     <div class="repeatCount">
                         <label>Repeat:</label>
                         <input type="number" class="input-repeatCount" value="1">
