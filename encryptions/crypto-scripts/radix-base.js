@@ -67,7 +67,6 @@ function radixEncrypt(text, radixFrom, radixTo) {
     letterPattern += letterPattern.toUpperCase();
     const pattern = `\\b[${numberPattern}${letterPattern}]+\\b`
     const regex = new RegExp(pattern, "g");
-    console.log(pattern);
     
     // Go through numbers
     let resultText = "";

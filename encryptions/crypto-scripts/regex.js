@@ -53,7 +53,12 @@ function regexMatchSingleGroupFull(text, nodeInfo) {
     let groupId = nodeInfo.groupId;
 
     // Encrypt
-    let resultText = regexMatchSingleGroup(text, pattern, matchId, groupId);
+    let resultText;
+    try {
+        resultText = regexMatchSingleGroup(text, pattern, matchId, groupId);
+    } catch (error) {
+        console.error(error);
+    }
     if (!resultText) {
         return {
             result: "Regular expression match failed!",
@@ -73,7 +78,12 @@ function regexMatchAllFull(text, nodeInfo) {
     let pattern = nodeInfo.pattern;
 
     // Encrypt
-    let resultText = regexMatchAll(text, pattern);
+    let resultText;
+    try {
+        resultText = regexMatchAll(text, pattern);
+    } catch (error) {
+        console.error(error);
+    }
     if (!resultText) {
         return {
             result: "Regular expression match failed!",
@@ -94,7 +104,12 @@ function regexReplaceFull(text, nodeInfo) {
     let replaceText = nodeInfo.replaceText;
 
     // Encrypt
-    let resultText = regexReplace(text, pattern, replaceText);
+    let resultText;
+    try {
+        resultText = regexReplace(text, pattern, replaceText);
+    } catch (error) {
+        console.error(error);
+    }
     if (!resultText) {
         return {
             result: "Regular expression match failed!",
