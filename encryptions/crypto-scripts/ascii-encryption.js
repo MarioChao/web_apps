@@ -12,11 +12,11 @@ const decimalValuesHex = invertObject(hexValues);
 
 // Local functions
 function invertObject(object) {
-    let ret = {};
+    let resultObject = {};
     for (let key of Object.keys(object)) {
-        ret[object[key]] = key;
+        resultObject[object[key]] = key.toUpperCase();
     }
-    return ret;
+    return resultObject;
 }
 
 function hexToDecimal(hex) {
