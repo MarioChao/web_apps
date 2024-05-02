@@ -2,14 +2,14 @@
 
 // Constants
 const digitValueString = "0123456789abcdefghijklmnopqrstuvwxyz";
-const digitToDecimal = createDigitObject(digitValueString);
-const decimalToDigit = invertObject(digitToDecimal);
+const digitToBigInt = createDigitObject(digitValueString);
+const bigIntToDigit = invertObject(digitToBigInt);
 
 
 // Local functions
 function createDigitObject(string) {
     let resultObject = {};
-    let value = 0;
+    let value = BigInt(0);
     for (let digit of string) {
         resultObject[digit.toLowerCase()] = value;
         resultObject[digit.toUpperCase()] = value;
@@ -26,32 +26,59 @@ function invertObject(object) {
     return resultObject;
 }
 
-function decimalToBase(number, radix) {
-    // Convert decimal to radix base
+function parseBigInt(string, radix = 10) {
+    // Validate
+    if (typeof radix !== "number" || isNaN(radix) || !(2 <= radix && radix <= 36)) {
+        throw new Error(`parseBigInt doesn't support radix ${radix}.`);
+    }
+
+    // Convert string in radix base to BigInt number
+    let resultBigInt = BigInt(0);
+    let base = BigInt(radix);
+    for (let digit of string) {
+        resultBigInt *= base;
+        resultBigInt += digitToBigInt[digit];
+    }
+    return resultBigInt;
+}
+
+function bigIntToBase(bigIntNumber, radix) {
+    // Validate
+    if (typeof radix !== "number" || isNaN(radix) || !(2 <= radix && radix <= 36)) {
+        throw new Error(`parseBigInt doesn't support radix ${radix}.`);
+    }
+
+    // Convert BigInt number to radix base
     let resultText = "";
-    let tmpDecimal = number;
-    while (tmpDecimal > 0) {
-        resultText = decimalToDigit[tmpDecimal % radix] + resultText;
-        tmpDecimal = Math.floor(tmpDecimal / radix);
+    let oldNumber = BigInt(bigIntNumber);
+    let base = BigInt(radix);
+    while (oldNumber > 0) {
+        resultText = bigIntToDigit[oldNumber % base] + resultText;
+        oldNumber = oldNumber / base; // BigInt division will floor
     }
     return resultText;
 }
 
 // Encryption functions
 function radixEncrypt(text, radixFrom, radixTo) {
-    let resultText = "";
+    // Create regex
+    let numberPattern = digitValueString.slice(0, Math.min(10, radixFrom));
+    let letterPattern = digitValueString.slice(10, radixFrom).toLowerCase();
+    letterPattern += letterPattern.toUpperCase();
+    const pattern = `\\b[${numberPattern}${letterPattern}]+\\b`
+    const regex = new RegExp(pattern, "g");
+    console.log(pattern);
     
     // Go through numbers
-    const pattern = `\\b[${digitValueString.substring(0, radixFrom)}]+\\b`
-    const regex = new RegExp(pattern, "g");
+    let resultText = "";
     let match;
     let lastIndex = 0;
     match = regex.exec(text);
     while (match !== null) {
         // Convert matched number
         const matchText = match[0];
-        const matchNumber = parseInt(matchText, radixFrom);
-        const newNumber = decimalToBase(matchNumber, radixTo);
+        const matchNumber = parseBigInt(matchText, radixFrom);
+        const newNumber = bigIntToBase(matchNumber, radixTo);
 
         // Update result text
         resultText += text.slice(lastIndex, match.index);
