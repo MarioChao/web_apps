@@ -49,4 +49,6 @@ button {
 }
 textarea {
     resize: none;
+    font-family: 'Fira Mono', Menlo, 'Courier New', Courier, Consolas, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    font-size: 12px;
 }
