@@ -44,101 +44,103 @@
         </div>
         
         <!-- Encryption -->
-        <div class="flex-container" id="encryption-list">
-            <div class="encryption-node state-default">
-                <div class="node-states" style="display: flex; justify-content: flex-end;">
-                    <button class="node-disabled-state transparent">
-                    </button>
-                    <span>&nbsp;</span>
-                    <button class="node-breakpoint-state transparent">
-                    </button>
-                </div>
-                <div class="node-type">
-                    <!-- Encryption type -->
-                    <label title="The type of encryption or decryption to perform">Type:</label>
-                    <select name="encryptionType" class="input-encryptionType">
-                        <option value="regexmatch">Regular Expression</option>
-                        <option value="regexmatchsingle">Regex Capture</option>
-                        <option value="regexreplace">Regex Replace</option>
-                        <option value="spiral">Spiral Encrypt</option>
-                        <option value="-spiral">Spiral Decrypt</option>
-                        <option value="hexascii">Text to Hex ASCII</option>
-                        <option value="-hexascii">Hex ASCII to Text</option>
-                        <option value="radix">Base / Radix Convert</option>
-                        <option value="vigenere">Vigenere Encrypt</option>
-                        <option value="-vigenere">Vigenere Decrypt</option>
-                        <option value="yee">Yee Encrypt</option>
-                        <option value="-yee">Yee Decrypt</option>
-                    </select>
-                    <br>
-                    <hr>
-                </div>
-                <div class="node-info" style="display: none;">
-                    <!-- Regex info -->
-                    <div class="pattern">
-                        <label>Regex:</label>
-                        <textarea type="text" class="input-pattern" placeholder="Regular expression pattern." rows="3" cols="23"></textarea>
-                        <br>
+        <div class="scrolling-frame" style="width: 90%; height: 300px; overflow-y: scroll;">
+            <div class="flex-container" id="encryption-list">
+                <div class="encryption-node state-default">
+                    <div class="node-states" style="display: flex; justify-content: flex-end;">
+                        <button class="node-disabled-state transparent">
+                        </button>
+                        <span>&nbsp;</span>
+                        <button class="node-breakpoint-state transparent">
+                        </button>
                     </div>
-                    <div class="matchId">
-                        <label>Match Id:</label>
-                        <input type="number" class="input-matchId" value="0">
+                    <div class="node-type">
+                        <!-- Encryption type -->
+                        <label title="The type of encryption or decryption to perform">Type:</label>
+                        <select name="encryptionType" class="input-encryptionType">
+                            <option value="regexmatch">Regular Expression</option>
+                            <option value="regexmatchsingle">Regex Capture</option>
+                            <option value="regexreplace">Regex Replace</option>
+                            <option value="spiral">Spiral Encrypt</option>
+                            <option value="-spiral">Spiral Decrypt</option>
+                            <option value="hexascii">Text to Hex ASCII</option>
+                            <option value="-hexascii">Hex ASCII to Text</option>
+                            <option value="radix">Base / Radix Convert</option>
+                            <option value="vigenere">Vigenere Encrypt</option>
+                            <option value="-vigenere">Vigenere Decrypt</option>
+                            <option value="yee">Yee Encrypt</option>
+                            <option value="-yee">Yee Decrypt</option>
+                        </select>
                         <br>
+                        <hr>
                     </div>
-                    <div class="groupId">
-                        <label>Group Id:</label>
-                        <input type="number" class="input-groupId" value="0">
-                        <br>
-                    </div>
-                    <div class="replaceText">
-                        <label>Replace:</label>
-                        <textarea type="text" class="input-replaceText" placeholder="Plaintext to replace with." rows="3" cols="23"></textarea>
-                        <br>
-                    </div>
-
-                    <!-- Encryption info -->
-                    <div class="rows">
-                        <label>Rows:</label>
-                        <input type="number" class="input-rows" value="5">
-                        <br>
-                    </div>
-                    <div class="columns">
-                        <label>Columns:</label>
-                        <input type="number" class="input-columns" value="10">
-                        <br>
-                    </div>
-                    <div class="phase">
-                        <label title="0:U, 1:R, 2:D, 3:L">Phase:</label>
-                        <input type="number" class="input-phase" value="0">
-                        <br>
-                    </div>
-                    <div class="clockwise">
-                        <label>Clockwise:</label>
-                        <input type="checkbox" class="input-clockwise" value="clockwise" checked>
-                        <br>
-                    </div>
-                    <div class="key">
-                        <label>Key:</label>
-                        <textarea type="text" class="input-key" placeholder="For numerical sequences, separate each term by white space." rows="3" cols="25"></textarea>
-                        <br>
-                    </div>
-                    <div class="radixFrom">
-                        <label>From Radix:</label>
-                        <input type="number" class="input-radixFrom" value="10">
-                        <br>
-                    </div>
-                    <div class="radixTo">
-                        <label>To Radix:</label>
-                        <input type="number" class="input-radixTo" value="2">
-                        <br>
-                    </div>
-                    
-                    <hr>
-                    
-                    <div class="repeatCount">
-                        <label>Repeat:</label>
-                        <input type="number" class="input-repeatCount" value="1">
-                        <br>
+                    <div class="node-info" style="display: none;">
+                        <!-- Regex info -->
+                        <div class="pattern">
+                            <label>Regex:</label>
+                            <textarea type="text" class="input-pattern" placeholder="Regular expression pattern." rows="3" cols="23"></textarea>
+                            <br>
+                        </div>
+                        <div class="matchId">
+                            <label>Match Id:</label>
+                            <input type="number" class="input-matchId" value="0">
+                            <br>
+                        </div>
+                        <div class="groupId">
+                            <label>Group Id:</label>
+                            <input type="number" class="input-groupId" value="0">
+                            <br>
+                        </div>
+                        <div class="replaceText">
+                            <label>Replace:</label>
+                            <textarea type="text" class="input-replaceText" placeholder="Plaintext to replace with." rows="3" cols="23"></textarea>
+                            <br>
+                        </div>
+    
+                        <!-- Encryption info -->
+                        <div class="rows">
+                            <label>Rows:</label>
+                            <input type="number" class="input-rows" value="5">
+                            <br>
+                        </div>
+                        <div class="columns">
+                            <label>Columns:</label>
+                            <input type="number" class="input-columns" value="10">
+                            <br>
+                        </div>
+                        <div class="phase">
+                            <label title="0:U, 1:R, 2:D, 3:L">Phase:</label>
+                            <input type="number" class="input-phase" value="0">
+                            <br>
+                        </div>
+                        <div class="clockwise">
+                            <label>Clockwise:</label>
+                            <input type="checkbox" class="input-clockwise" value="clockwise" checked>
+                            <br>
+                        </div>
+                        <div class="key">
+                            <label>Key:</label>
+                            <textarea type="text" class="input-key" placeholder="For numerical sequences, separate each term by white space." rows="3" cols="25"></textarea>
+                            <br>
+                        </div>
+                        <div class="radixFrom">
+                            <label>From Radix:</label>
+                            <input type="number" class="input-radixFrom" value="10">
+                            <br>
+                        </div>
+                        <div class="radixTo">
+                            <label>To Radix:</label>
+                            <input type="number" class="input-radixTo" value="2">
+                            <br>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="repeatCount">
+                            <label>Repeat:</label>
+                            <input type="number" class="input-repeatCount" value="1">
+                            <br>
+                        </div>
                     </div>
                 </div>
             </div>

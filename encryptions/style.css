@@ -10,6 +10,12 @@
     border: 3px solid black;
 }
 
+.scrolling-frame {
+    margin: auto;
+    background: linear-gradient(to bottom right, #ffd6d67f 0%, #d4d4fe7f 50%, #d3fdd37f 100%);
+    border: 3px solid rgb(128, 128, 128);
+}
+
 /* For encryption nodes */
 .state-default {
     background-color: #d3fdd3;
