@@ -1,3 +1,4 @@
-# Welcome to the Web Apps page!
-* [Encryptions](./encryptions/)
-* [VEX Competition Tools](./vex-competition-tools)
+# Welcome to the Web Apps hub!
+
+* [Encryptions](https://mariochao.github.io/encryptions/)
+* [VEX Competition Tools](https://mariochao.github.io/vex-competition-tools/)
